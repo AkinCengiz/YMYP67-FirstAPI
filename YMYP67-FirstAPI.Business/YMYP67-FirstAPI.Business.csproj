@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\YMYP67-FirstAPI.DataAccess\YMYP67-FirstAPI.DataAccess.csproj" />
+    <ProjectReference Include="..\YMYP67-FirstAPI.Entities\YMYP67-FirstAPI.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

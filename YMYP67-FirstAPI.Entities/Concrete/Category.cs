@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using YMYP67_FirstAPI.Entities.Abstract;
 
 namespace YMYP67_FirstAPI.Entities.Concrete;
-public class Category : BaseEntity
+public sealed class Category : BaseEntity
 {
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;

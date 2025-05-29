@@ -7,7 +7,7 @@ using YMYP67_FirstAPI.Entities.Abstract;
 
 namespace YMYP67_FirstAPI.Entities.Concrete;
 
-public class Product : BaseEntity
+public sealed class Product : BaseEntity
 {
     public string Name { get; set; }
     public string Description { get; set; } = string.Empty;

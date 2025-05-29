@@ -1,0 +1,6 @@
+@YMYP67_FirsAPI.WebApi_HostAddress = http://localhost:5236
+
+GET {{YMYP67_FirsAPI.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
