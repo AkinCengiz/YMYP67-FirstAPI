@@ -4,23 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using YMYP67_FirstAPI.DataAccess.Abstract;
 using YMYP67_FirstAPI.Entities.Concrete;
 
 namespace YMYP67_FirstAPI.DataAccess.Concrete.EntityFramework;
-public class EfCategoryDal
+public class EfCategoryDal : EfGenericRepository<Category>, ICategoryDal
 {
-    private FirstApiContext _context;
-    private DbSet<Category> _dbSet;
-
-    public EfCategoryDal(FirstApiContext context)
+    public EfCategoryDal(FirstApiContext context) : base(context)
     {
-        _context = context;
-        _dbSet = _context.Set<Category>();
-    }
-
-    public void Add(Category category)
-    {
-        _dbSet.Add(category);
-        _context.SaveChanges();
+        
     }
 }
