@@ -15,7 +15,7 @@ public class CategoryManager : ICategoryService
 {
     private readonly ICategoryDal _categoryDal;
 
-    public CategoryManager(EfCategoryDal categoryDal)
+    public CategoryManager(ICategoryDal categoryDal)
     {
         _categoryDal = categoryDal;
     }
@@ -30,6 +30,11 @@ public class CategoryManager : ICategoryService
         return _categoryDal.GetAll();
     }
 
+    public IQueryable<Category> GetAllQueryable()
+    {
+        return _categoryDal.GetAllQueryable();
+    }
+
     public void Insert(Category entity)
     {
         _categoryDal.Add(entity);
@@ -37,6 +42,7 @@ public class CategoryManager : ICategoryService
 
     public void Modify(Category entity)
     {
+        entity.UpdateAt = DateTime.Now; // Güncelleme tarihini ayarla
         _categoryDal.Update(entity);
     }
 

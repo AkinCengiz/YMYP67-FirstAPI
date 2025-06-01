@@ -41,6 +41,12 @@ public class EfGenericRepository<T> : IEntityRepository<T> where T : class, IEnt
     {
         return filter == null ? _dbSet.ToList() : _dbSet.Where(filter).ToList();
     }
+
+    public IQueryable<T> GetAllQueryable(Expression<Func<T, bool>>? filter = null)
+    {
+        return filter == null ? _dbSet : _dbSet.Where(filter);
+    }
+
     //GetAll() metodu, filtreleme yapılmadan tüm verileri döndürür.
     //GetAll(int categoryId) metodu, belirli bir kategoriye ait tüm ürünleri döndürür.
     public void Update(T entity)

@@ -13,4 +13,5 @@ public interface IGenericService<T> where T : class, IEntity, new()
     void Remove(T entity);
     T GetById(int id);
     List<T> GetList();
+    IQueryable<T> GetAllQueryable();
 }

@@ -30,6 +30,11 @@ public class AdoCategoryDal : ICategoryDal
         throw new NotImplementedException();
     }
 
+    public IQueryable<Category> GetAllQueryable(Expression<Func<Category, bool>>? filter = null)
+    {
+        throw new NotImplementedException();
+    }
+
     public void Update(Category entity)
     {
         throw new NotImplementedException();

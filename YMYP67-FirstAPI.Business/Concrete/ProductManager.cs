@@ -13,7 +13,7 @@ public class ProductManager : IProductService
 {
     private readonly IProductDal _productDal;
 
-    public ProductManager(EfProductDal productDal)
+    public ProductManager(IProductDal productDal)
     {
         _productDal = productDal;
     }
@@ -61,5 +61,10 @@ public class ProductManager : IProductService
     public List<Product> GetProductsOutOfStock()
     {
         return _productDal.GetAll(p => p.Stock == 0);
+    }
+
+    public IQueryable<Product> GetAllQueryable()
+    {
+        return _productDal.GetAllQueryable();
     }
 }

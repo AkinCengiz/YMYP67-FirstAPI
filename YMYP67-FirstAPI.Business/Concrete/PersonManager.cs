@@ -28,6 +28,11 @@ public class PersonManager : IPersonService
         return _personDal.GetAll();
     }
 
+    public IQueryable<Person> GetAllQueryable()
+    {
+        throw new NotImplementedException();
+    }
+
     public void Insert(Person entity)
     {
         _personDal.Add(entity);

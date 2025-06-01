@@ -17,4 +17,5 @@ public interface IEntityRepository<T> where T : class, IEntity, new()
     //GetAll() metodu, filtreleme yapılmadan tüm verileri döndürür.
     //Eğer filtreleme yapılmak istenirse, filter parametresi kullanılarak belirli koşullara uyan veriler döndürülebilir.
     //GetAll(categoryId) metodu, belirli bir kategoriye ait tüm ürünleri döndürür. 
+    IQueryable<T> GetAllQueryable(Expression<Func<T, bool>>? filter = null);
 }
