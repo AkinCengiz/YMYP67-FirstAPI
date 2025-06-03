@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YMYP67_FirstAPI.Entities.Concrete;
 
-namespace YMYP67_FirstAPI.Business.Abstract;
-public interface ICategoryService : IGenericService<Category>
+namespace YMYP67_FirstAPI.DataAccess.Abstract;
+public interface ICustomerDal : IEntityRepository<Customer>
 {
-    List<Category> GetAllCategoryWithProducts();
-    }
+}

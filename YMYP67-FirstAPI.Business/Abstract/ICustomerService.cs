@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using YMYP67_FirstAPI.Entities.Concrete;
 
 namespace YMYP67_FirstAPI.Business.Abstract;
-public interface ICategoryService : IGenericService<Category>
+public interface ICustomerService : IGenericService<Customer>
 {
-    List<Category> GetAllCategoryWithProducts();
-    }
+}

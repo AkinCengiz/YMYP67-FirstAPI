@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using YMYP67_FirstAPI.Business.Abstract;
 using YMYP67_FirstAPI.Entities.Concrete;
+using YMYP67_FirstAPI.Entities.Dtos.Product;
 
 namespace YMYP67_FirsAPI.WebApi.Controllers;
 [Route("api/[controller]")]
@@ -37,18 +38,11 @@ public class ProductsController : ControllerBase
     [HttpGet]
     public IActionResult GetAll()
     {
-        var response = _productService.GetAllQueryable().Include(p => p.Category).ToList();
+        //var response = _productService.GetAllQueryable().Include(p => p.Category).ToList();
 
-        var dtoList = response.Select(p => new
-        {
-            p.Id,
-            p.Name,
-            p.Description,
-            p.Price,
-            p.Stock,
-            p.ImageUrl,
-            Category = p.Category?.Name
-        }).ToList();
-        return Ok(dtoList);
+        var response = _productService.GetList();
+
+        List<ProductResponseDto> dtos = response.Select(p => new ProductResponseDto(p.Id,p.Name,p.Description,p.Price,p.Stock,p.Category.Name)).ToList();
+        return Ok(dtos);
     }
 }

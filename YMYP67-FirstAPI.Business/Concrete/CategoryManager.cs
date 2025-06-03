@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using YMYP67_FirstAPI.Business.Abstract;
 using YMYP67_FirstAPI.DataAccess.Abstract;
 using YMYP67_FirstAPI.DataAccess.Concrete.AdoNet;
 using YMYP67_FirstAPI.DataAccess.Concrete.EntityFramework;
 using YMYP67_FirstAPI.DataAccess.Concrete.NHibernate;
 using YMYP67_FirstAPI.Entities.Concrete;
+using YMYP67_FirstAPI.Entities.Dtos.Category;
 
 namespace YMYP67_FirstAPI.Business.Concrete;
 public class CategoryManager : ICategoryService
@@ -37,6 +39,7 @@ public class CategoryManager : ICategoryService
 
     public void Insert(Category entity)
     {
+        
         _categoryDal.Add(entity);
     }
 
@@ -49,5 +52,11 @@ public class CategoryManager : ICategoryService
     public void Remove(Category entity)
     {
         _categoryDal.Delete(entity);
+    }
+
+    public List<Category> GetAllCategoryWithProducts()
+    {
+        return _categoryDal.GetAllQueryable().Include(c => c.Products).ToList();
+
     }
 }

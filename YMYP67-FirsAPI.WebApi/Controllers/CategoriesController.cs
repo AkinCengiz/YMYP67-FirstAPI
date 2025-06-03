@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Security.Cryptography;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YMYP67_FirstAPI.Business.Abstract;
 using YMYP67_FirstAPI.Business.Concrete;
 using YMYP67_FirstAPI.DataAccess.Concrete.EntityFramework;
 using YMYP67_FirstAPI.Entities.Concrete;
+using YMYP67_FirstAPI.Entities.Dtos.Category;
 
 namespace YMYP67_FirsAPI.WebApi.Controllers;
 [Route("api/[controller]")]
@@ -21,13 +23,73 @@ public class CategoriesController : ControllerBase
     [HttpGet]
     public IActionResult GetAll()
     {
-        var response = _categoryManager.GetList();
-        return Ok(response);
+        var response = _categoryManager.GetAllCategoryWithProducts();
+        
+
+        //var responseData = new List<object>();
+        //foreach (var category in response)
+        //{
+        //    var data = new
+        //    {
+        //        category.Id,
+        //        category.Name,
+        //        category.Description,
+        //        category.IsActive,
+        //        Products = category.Products.Select(p => new
+        //        {
+        //            Name = p.Name,
+        //            Price = p.Price,
+        //            Stock = p.Stock,
+        //            Description = p.Description,
+        //            CategoryId = p.Category.Id
+
+        //        }).ToList()
+        //    };
+        //    responseData.Add(data);
+        //}
+
+        
+
+
+        //var responseData = response.Select(c => new
+        //{
+        //    c.Id,
+        //    c.Name,
+        //    c.Description,
+        //    c.IsActive,
+        //    Products = c.Products.Select(p => new
+        //    {
+        //        p.Id,
+        //        p.Name,
+        //        p.Price
+        //    }).ToList()
+        //}).ToList();
+
+        List<CategoryResponseDto> categoryDto = new List<CategoryResponseDto>();
+
+        foreach (var category in response)
+        {
+            CategoryResponseDto dto = new()
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Description = category.Description
+            };
+            categoryDto.Add(dto);
+        }
+        
+
+        return Ok(categoryDto);
     }
 
     [HttpPost]
-    public IActionResult Create(Category category)
+    public IActionResult Create(AddCategoryRequestDto dto)
     {
+        Category category = new()
+        {
+            Name = dto.Name,
+            Description = dto.Description
+        };
         _categoryManager.Insert(category);
         return Ok(category);
     }
@@ -44,8 +106,16 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPut]
-    public IActionResult Update(Category category)
+    public IActionResult Update(UpdateCategoryRequestDto dto)
     {
+        Category category = new()
+        {
+            Id = dto.Id,
+            Name = dto.Name,
+            Description = dto.Description,
+            IsActive = dto.IsActive,
+            IsDeleted = dto.IsDeleted
+        };
         _categoryManager.Modify(category);
         return Ok(category);
     }

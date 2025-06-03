@@ -31,6 +31,8 @@ public class Program
         builder.Services.AddScoped<ICategoryService, CategoryManager>();
         builder.Services.AddScoped<IProductDal, EfProductDal>();
         builder.Services.AddScoped<IProductService, ProductManager>();
+        builder.Services.AddScoped<ICustomerService,CustomerManager>();
+        builder.Services.AddScoped<ICustomerDal,EfCustomerDal>();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 

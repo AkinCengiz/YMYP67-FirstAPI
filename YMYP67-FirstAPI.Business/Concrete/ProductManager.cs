@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using YMYP67_FirstAPI.Business.Abstract;
 using YMYP67_FirstAPI.DataAccess.Abstract;
 using YMYP67_FirstAPI.DataAccess.Concrete.EntityFramework;
@@ -40,7 +41,7 @@ public class ProductManager : IProductService
 
     public List<Product> GetList()
     {
-        return _productDal.GetAll();
+        return _productDal.GetAllQueryable().Include(p => p.Category).ToList();
     }
 
     public List<Product> GetProductsByCategory(int categoryId)
@@ -67,4 +68,7 @@ public class ProductManager : IProductService
     {
         return _productDal.GetAllQueryable();
     }
+
+
+    
 }
